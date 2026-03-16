@@ -1,0 +1,38 @@
+.sidebar{
+    background-image: url("./assets/assets/images/bg-sidebar-desktop.svg");
+    background-repeat: no-repeat;
+    width: 400px;
+    height: 100%;
+}
+
+.app{
+    display: flex;
+    background-color: white;
+    width: 1000px;
+    height: 600px;
+}
+
+.content{
+    width: 60%;
+    height: 100%;
+}
+
+.arcade, .pro, .advance{
+    width: 30%;
+    height: 150px;
+    border: 1px solid blue;
+}
+
+.plans{
+    display: flex;
+    flex-direction: row;
+}
+.subs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nav{
+    display: flex;
+    justify-content: space-between;
+}

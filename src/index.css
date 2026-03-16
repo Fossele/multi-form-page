@@ -1,0 +1,8 @@
+#root{
+    background-color: aliceblue;
+    width: 1500px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
