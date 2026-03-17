@@ -38,6 +38,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    padding: 1rem;
 }
 
 .arcade img{
@@ -68,6 +69,28 @@
     align-items: center;
     justify-content: center;
 }
+
+.blue{
+width: 10px;
+height: 10px;
+background-color: blue;
+border: none;
+border-radius: 50%;
+}
+
+.plan-btn-left, .plan-btn-rigth{
+width: 30px;
+height: 14px;
+display: flex;
+transition-duration: 10s;
+}
+
+.plan-btn-rigth{
+    justify-content: flex-end;
+}
+
+
+
 .nav{
     display: flex;
     justify-content: space-between;
