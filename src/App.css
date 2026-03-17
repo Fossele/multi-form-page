@@ -82,11 +82,12 @@ border-radius: 50%;
 width: 30px;
 height: 14px;
 display: flex;
-transition-duration: 10s;
+
 }
 
 .plan-btn-rigth{
     justify-content: flex-end;
+    transition: 1s;
 }
 
 
@@ -94,6 +95,12 @@ transition-duration: 10s;
 .nav{
     display: flex;
     justify-content: space-between;
+}
+
+.nav-end{
+       display: flex;
+    justify-content: flex-end;
+
 }
 
 .nav .prev,.next{

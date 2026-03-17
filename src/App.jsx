@@ -7,7 +7,8 @@ import './App.css'
 
 function Step1({ setStep }) {
   return (
-    <div>
+    <>
+    <div className='operation'>
       <h1>Personal info</h1>
       <p> Please provide your name, email address, and phone number.</p>
 
@@ -19,9 +20,14 @@ function Step1({ setStep }) {
 
       <label for="number"> Phone Number </label>
       <input type='number' placeholder=' e.g. +1 234 567 890' />
-
-      <button onClick={() => setStep("step2")} className='next'>Next Step</button>
     </div>
+    <div className='nav-end'>
+     <button onClick={() => setStep("step2")} className='next'>Next Step</button>
+    </div>
+     
+
+     
+    </>
   )
 }
 
