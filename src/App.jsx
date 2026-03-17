@@ -99,21 +99,21 @@ function Step3({ setStep, plan, onlineService, setOnlineService, largerStorage, 
         <h1>Pick add-ons</h1>
         <p>Add-ons help enhance your gaming experience.</p>
         <div className='add-on'>
-          <div onClick={() => setOnlineService(!onlineService)}>
+          <div className="box" onClick={() => setOnlineService(!onlineService)}>
             <img src='tick' alt='tick' />
             <span>Online service</span>
             <span>Access to multiplayer games</span>
             {(plan == "monthly") ? <span>+$1/mo</span> : <span>+$1/yr</span>}
           </div>
 
-          <div onClick={() => setLargerStorage(!largerStorage)}>
+          <div className="box"  onClick={() => setLargerStorage(!largerStorage)}>
             <img src='tick' alt='tick' />
             <span>Larger storage</span>
             <span> Extra 1TB of cloud save</span>
             {(plan == "monthly") ? <span>+$2/mo</span> : <span>+$2/yr</span>}
           </div>
 
-          <div onClick={() => setCustomProfile(!customProfile)}>
+          <div  className="box" onClick={() => setCustomProfile(!customProfile)}>
             <img src='tick' alt='tick' />
             <span>Customizable Profile</span>
             <span> Custom theme on your profile</span>
