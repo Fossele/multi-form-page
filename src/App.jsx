@@ -20,7 +20,7 @@ function Step1({ setStep }) {
       <label for="number"> Phone Number </label>
       <input type='number' placeholder=' e.g. +1 234 567 890' />
 
-      <button onClick={() => setStep("step2")}>Next Step</button>
+      <button onClick={() => setStep("step2")} className='next'>Next Step</button>
     </div>
   )
 }
@@ -32,24 +32,30 @@ function Step2({ setStep, setLevel, plan, setPlan}) {
 
 
   return (
-    <div>
+    <>
+    <div className='operation'>
       <h1>Select your plan</h1>
       <p>You have the option of monthly or yearly billing.</p>
       {(plan == "monthly") ? <div className='plans'>
         <div onClick={()=>setLevel("arcade")} className='arcade'> 
             <img src={arcade}/>
-           Arcade
-          $9/mo</div>
+          <span>
+            Arcade
+          $9/mo
+            </span> </div>
 
         <div onClick={()=>setLevel("advanced")}  className='advance'> 
           <img src={advanced}/>
-            Advanced
-          $12/mo</div>
+          <span>
+   Advanced $12/mo
+          </span>
+         </div>
 
         <div  onClick={()=>setLevel("pro")}  className='pro'>
             <img src={pro}/>
-            Pro
-          $15/mo</div>
+
+          <span> Pro $15/mo</span>
+          </div>
       </div> : <div className='plans'>
         <div onClick={()=>setLevel("arcade")}  className='arcade'> 
            Arcade
@@ -71,15 +77,15 @@ function Step2({ setStep, setLevel, plan, setPlan}) {
         }}>{plan}</button>
         <p>Yearly</p>
       </div>
-
+        </div>
 
        <div className='nav'>
-         <button onClick={() => setStep("step1")}>Go Back</button>
-      <button onClick={() => setStep("step3")}>Next Step</button>
+         <button onClick={() => setStep("step1")} className='prev'>Go Back</button>
+      <button onClick={() => setStep("step3")} className='next'>Next Step</button>
        </div>
-      
+      </>
 
-    </div>
+  
   )
 }
 
@@ -145,8 +151,9 @@ function Step3({ setStep, plan, onlineService, setOnlineService, largerStorage, 
         </div>
       </div>}
       <div className='nav'>
-       <button onClick={() => setStep("step2")}>Go Back</button>
-      <button onClick={() => setStep("step4")}>Next Step</button>
+       
+       <button onClick={() => setStep("step2")} className='prev'>Go Back</button>
+      <button onClick={() => setStep("step4")}  className='next'>Next Step</button>
       </div>
      
 
@@ -244,8 +251,8 @@ setRes(total);
 }
       <p>{total} (per month/year)</p> 
      <div className='nav'>
-        <button onClick={() => setStep("step3")}>Go Back</button>
-      <button onClick={() => setStep("step5")}>Next Step</button>
+        <button onClick={() => setStep("step3")} className='prev'>Go Back</button>
+      <button onClick={() => setStep("step5")} className='next'>Next Step</button>
      </div>
      
     </div>
