@@ -68,12 +68,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: hsl(218, 100%, 97%);
+    padding: 1rem;
+    border-radius: 1rem;
 }
 
 .blue{
 width: 10px;
 height: 10px;
-background-color: blue;
+background-color: white;
 border: none;
 border-radius: 50%;
 }
@@ -82,7 +85,11 @@ border-radius: 50%;
 width: 30px;
 height: 14px;
 display: flex;
-
+align-items: center;
+background-color: hsl(213, 96%, 18%);
+border: none;
+padding: 1px 5px;
+border-radius: 30%;
 }
 
 .plan-btn-rigth{
@@ -107,6 +114,29 @@ display: flex;
     height: 2rem;
     width: 6rem;
     font-size: 1rem;
+    border-radius: 10px;
+}
+
+button.prev{
+    border: none;
+    background-color: inherit;
+    color: black;
+}
+
+button.prev:hover{
+    border: none;
+    background-color: inherit;
+    color: hsl(213, 96%, 18%);
+    font-weight: bold;
+}
+
+
+button.next{
+  border: none;
+  background-color: hsl(213, 96%, 18%);
+  color: white;
+  font-weight: bold;
+
 }
 
 .box{
@@ -114,6 +144,7 @@ display: flex;
      height: 4rem;
      width: 100%;
      padding: 1.5rem;
+    border-radius: 1rem;
 }
 
 .add-on{
@@ -122,3 +153,24 @@ display: flex;
     justify-content: space-evenly;
     height: 80%;
 }
+
+.thank{
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+div.thank h1{
+    margin: 10px;
+}
+
+div.thank img{
+    margin-bottom: 20px;
+}
+
+div.thank p{
+   font-weight: 300;
+}
+

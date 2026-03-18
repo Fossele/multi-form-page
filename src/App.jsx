@@ -8,25 +8,25 @@ import './App.css'
 function Step1({ setStep }) {
   return (
     <>
-    <div className='operation'>
-      <h1>Personal info</h1>
-      <p> Please provide your name, email address, and phone number.</p>
+      <div className='operation'>
+        <h1>Personal info</h1>
+        <p> Please provide your name, email address, and phone number.</p>
 
-      <label for="name">Name</label>
-      <input type='text' placeholder='e.g. Stephen King' />
+        <label for="name">Name</label>
+        <input type='text' placeholder='e.g. Stephen King' />
 
-      <label for="email">Email Address</label>
-      <input type='email' placeholder='e.g. stephenking@lorem.com' />
+        <label for="email">Email Address</label>
+        <input type='email' placeholder='e.g. stephenking@lorem.com' />
 
-      <label for="number"> Phone Number </label>
-      <input type='number' placeholder=' e.g. +1 234 567 890' />
-    </div>
-    <div className='nav-end'>
-     <button onClick={() => setStep("step2")} className='next'>Next Step</button>
-    </div>
-     
+        <label for="number"> Phone Number </label>
+        <input type='number' placeholder=' e.g. +1 234 567 890' />
+      </div>
+      <div className='nav-end'>
+        <button onClick={() => setStep("step2")} className='next'>Next Step</button>
+      </div>
 
-     
+
+
     </>
   )
 }
@@ -41,20 +41,20 @@ function Step2({ setStep, setLevel, plan, setPlan }) {
       <div className='operation'>
         <h1>Select your plan</h1>
         <p>You have the option of monthly or yearly billing.</p>
-      <div className='plans'>
+        <div className='plans'>
           <div onClick={() => setLevel("arcade")} className='arcade'>
             <img src={arcade} />
             <span>
               <b>Arcade</b>
-              {plan == "monthly" ? <p>$9/mo</p>: <p>$90/yr</p>}
-            </span> 
-      </div>
+              {plan == "monthly" ? <p>$9/mo</p> : <p>$90/yr</p>}
+            </span>
+          </div>
 
           <div onClick={() => setLevel("advanced")} className='advance'>
             <img src={advanced} />
             <span>
-              <b>Advanced</b>  
-              {plan == "monthly" ?<p>$12/mo</p>:<p>$120/yr</p>}
+              <b>Advanced</b>
+              {plan == "monthly" ? <p>$12/mo</p> : <p>$120/yr</p>}
             </span>
           </div>
 
@@ -62,15 +62,15 @@ function Step2({ setStep, setLevel, plan, setPlan }) {
             <img src={pro} />
 
             <span> <b>Pro</b>
-            {plan == "monthly" ?<p>$15/mo</p>:<p>$150/yr</p>}
+              {plan == "monthly" ? <p>$15/mo</p> : <p>$150/yr</p>}
             </span>
           </div>
-        </div> 
+        </div>
 
 
         <div className='subs'>
           <p>Monthly</p>
-          <button className={plan == "monthly" ? "plan-btn-left":"plan-btn-rigth"} onClick={() => {
+          <button className={plan == "monthly" ? "plan-btn-left" : "plan-btn-rigth"} onClick={() => {
             if (plan == "monthly") { setPlan("yearly") } else { setPlan("monthly") }
 
           }} >
@@ -106,14 +106,14 @@ function Step3({ setStep, plan, onlineService, setOnlineService, largerStorage, 
             {(plan == "monthly") ? <span>+$1/mo</span> : <span>+$1/yr</span>}
           </div>
 
-          <div className="box"  onClick={() => setLargerStorage(!largerStorage)}>
+          <div className="box" onClick={() => setLargerStorage(!largerStorage)}>
             <img src='tick' alt='tick' />
             <span>Larger storage</span>
             <span> Extra 1TB of cloud save</span>
             {(plan == "monthly") ? <span>+$2/mo</span> : <span>+$2/yr</span>}
           </div>
 
-          <div  className="box" onClick={() => setCustomProfile(!customProfile)}>
+          <div className="box" onClick={() => setCustomProfile(!customProfile)}>
             <img src='tick' alt='tick' />
             <span>Customizable Profile</span>
             <span> Custom theme on your profile</span>
@@ -232,12 +232,12 @@ function Step4({ plan, setStep, largerStorage, customProfile, onlineService, lev
 
 function Step5() {
   return (
-    <div>
+    <div className='thank'>
       <img src={thankyou} alt='tick' />
       <h1>Thank you!</h1>
 
-      <p>Thanks for confirming your subscription! We hope you have fun
-        using our platform. If you ever need support, please feel free
+      <p>Thanks for confirming your subscription! We hope you have <br /> fun
+        using our platform. If you ever need support, please feel<br /> free
         to email us at support@loremgaming.com.</p>
 
     </div>
@@ -250,7 +250,26 @@ function SideBar() {
 
   return (
     <div className='sidebar'>
-
+      <div>
+        <div>zhz</div>
+        <div>step 1</div>
+        <div>INFO</div>
+      </div>
+      <div>
+        <div>he</div>
+        <div>step 2</div>
+        <div>SELECT PLAN</div>
+      </div>
+      <div>
+        <div>he</div>
+        <div>step 3</div>
+        <div>ADD-ONS</div>
+      </div>
+      <div>
+        <div>he</div>
+        <div>step 4</div>
+        <div>SUMMARY</div>
+      </div>
     </div>
   );
 }
@@ -271,7 +290,6 @@ function ContentContainer() {
       {(step == "step3") && <Step3 setStep={setStep} plan={plan} largerStorage={largerStorage} onlineService={onlineService} customProfile={customProfile} setOnlineService={setOnlineService} setCustomProfile={setCustomProfile} setLargerStorage={setLargerStorage} />}
       {(step == "step4") && <Step4 setStep={setStep} plan={plan} level={level} largerStorage={largerStorage} onlineService={onlineService} customProfile={customProfile} />}
       {(step == "step5") && <Step5 setStep={setStep} />}
-
     </div>
   );
 }
