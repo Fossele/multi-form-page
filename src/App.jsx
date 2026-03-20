@@ -3,6 +3,7 @@ import thankyou from "./assets/assets/images/icon-thank-you.svg"
 import arcade from "./assets/assets/images/icon-arcade.svg"
 import advanced from "./assets/assets/images/icon-advanced.svg"
 import pro from "./assets/assets/images/icon-pro.svg"
+import check from "./assets/assets/images/icon-checkmark.svg"
 import './App.css'
 
 function Step1({ setStep }) {
@@ -13,16 +14,17 @@ function Step1({ setStep }) {
         <p> Please provide your name, email address, and phone number.</p>
 
         <label for="name">Name</label>
-        <input type='text' placeholder='e.g. Stephen King' />
+        <input type='text' id='name' placeholder='e.g. Stephen King' required />
 
         <label for="email">Email Address</label>
-        <input type='email' placeholder='e.g. stephenking@lorem.com' />
+        <input type='email' id='email' placeholder='e.g. stephenking@lorem.com' required />
 
-        <label for="number"> Phone Number </label>
-        <input type='number' placeholder=' e.g. +1 234 567 890' />
+        <label for="number" > Phone Number </label>
+        <input type='number' id='number' placeholder=' e.g. +1 234 567 890' required />
+
       </div>
       <div className='nav-end'>
-        <button onClick={() => setStep("step2")} className='next'>Next Step</button>
+        <button type='submit' onClick={() => setStep("step2")} className='next' value="Next">Next Step</button>
       </div>
 
 
@@ -100,23 +102,42 @@ function Step3({ setStep, plan, onlineService, setOnlineService, largerStorage, 
         <p>Add-ons help enhance your gaming experience.</p>
         <div className='add-on'>
           <div className="box" onClick={() => setOnlineService(!onlineService)}>
-            <img src='tick' alt='tick' />
-            <span>Online service</span>
-            <span>Access to multiplayer games</span>
+            <div className='tick'>
+              <img src={check} alt='tick' />
+            </div>
+            <div className='center'>
+              <div>Online service</div>
+              <div>Access to multiplayer games</div>
+            </div>
+
             {(plan == "monthly") ? <span>+$1/mo</span> : <span>+$1/yr</span>}
           </div>
 
           <div className="box" onClick={() => setLargerStorage(!largerStorage)}>
-            <img src='tick' alt='tick' />
-            <span>Larger storage</span>
-            <span> Extra 1TB of cloud save</span>
+            <div className='tick'>
+              <img src={check} alt='tick' />
+            </div>
+            <div className='center'>
+              <div>Larger storage</div>
+              <div> Extra 1TB of cloud save</div>
+            </div>
+
             {(plan == "monthly") ? <span>+$2/mo</span> : <span>+$2/yr</span>}
           </div>
 
           <div className="box" onClick={() => setCustomProfile(!customProfile)}>
-            <img src='tick' alt='tick' />
-            <span>Customizable Profile</span>
-            <span> Custom theme on your profile</span>
+            <div>
+                     <div className='tick'>
+              <img src={check} alt='tick' />
+            </div>
+            <div className='center'>
+              <div>Customizable Profile</div>
+              <div> Custom theme on your profile</div>
+            </div>
+            </div>
+
+
+
             {(plan == "monthly") ? <span>+$2/mo</span> : <span>+$2/yr</span>}
           </div>
         </div>
@@ -147,47 +168,7 @@ function Step4({ plan, setStep, largerStorage, customProfile, onlineService, lev
       pro: "150",
     }
   }
-  /*setTotal(0);
-    setTotal(price.Mo.level);
-    if(localStorage){setTotal(total + 1)};
-    if(customProfile){setTotal(total + 2)};
-    if(onlineService){setTotal(total + 3)};
-  
-    if(plan == "monthly"){
-    setTotal(0);
-    setTotal(price.Mo.level);
-    if(localStorage){setTotal(total + 1)};
-    if(customProfile){setTotal(total + 2)};
-    if(onlineService){setTotal(total + 3)};
-  }else{
-      setTotal(0);
-    setTotal(price.Yr.level);
-    if(localStorage){setTotal(total + 1)};
-    if(customProfile){setTotal(total + 2)};
-    if(onlineService){setTotal(total + 3)};
-  }
-  
-  
-  
-    if(plan == "monthly"){
-        total = price.Mo.level;
-    if(localStorage){total += 1};
-    if(customProfile){total += 2};
-    if(onlineService){total += 3};
-    return total;
-  }else{
-      
-    total = price.Yr.level;
-    if(localStorage){total += 1};
-    if(customProfile){total += 2};
-    if(onlineService){total += 3};
-    return total;
-  }
-  
-  
-  
-  setRes(total);
-  */
+
   return (
     <>
       <div className='operation'>
@@ -200,6 +181,7 @@ function Step4({ plan, setStep, largerStorage, customProfile, onlineService, lev
             {(level == "arcade") && <div>${level} {price.Mo.arcade}mo</div>}
             {(level == "advanced") && <div>${level}mo</div>}
             {(level == "pro") && <div>${level}mo</div>}
+            <div onClick={() => { setStep("step2") }} className='change'>Change</div>
           </div>
           <div>
             {largerStorage && <div>larger storage</div>}
@@ -208,7 +190,7 @@ function Step4({ plan, setStep, largerStorage, customProfile, onlineService, lev
           </div>
         </div> : <div>
           <div>
-            {(level == "arcade") && <div>{level}yr {"hey" + price.Yr.arcade + (level == "arcade") ? 7 + 6 : 8}</div>}
+            {(level == "arcade") && <div>{level}yr </div>}
             {(level == "advanced") && <div>{level}yr</div>}
             {(level == "pro") && <div>{level}yr</div>}
           </div>
@@ -223,7 +205,7 @@ function Step4({ plan, setStep, largerStorage, customProfile, onlineService, lev
       </div>
       <div className='nav'>
         <button onClick={() => setStep("step3")} className='prev'>Go Back</button>
-        <button onClick={() => setStep("step5")} className='next'>Next Step</button>
+        <button onClick={() => setStep("step5")} className='confirm'>Confirm</button>
       </div>
     </>
   )
@@ -246,30 +228,43 @@ function Step5() {
 
 
 
-function SideBar() {
+function SideBar({ step }) {
 
   return (
     <div className='sidebar'>
-      <div>
-        <div>zhz</div>
-        <div>step 1</div>
-        <div>INFO</div>
+
+      <div className='step'>
+        <div className={!(step == "step1") ? "circle" : "circle-step"}>1</div>
+        <div className='yes'>
+          <p>step 1</p>
+          <div>INFO</div>
+        </div>
       </div>
-      <div>
-        <div>he</div>
-        <div>step 2</div>
-        <div>SELECT PLAN</div>
+
+      <div className='step'>
+        <div className={!(step == "step2") ? "circle" : "circle-step"}>2</div>
+        <div className='yes'>
+          <p>step 2</p>
+          <div>SELECT PLAN</div>
+        </div>
       </div>
-      <div>
-        <div>he</div>
-        <div>step 3</div>
-        <div>ADD-ONS</div>
+
+      <div className='step'>
+        <div className={!(step == "step3") ? "circle" : "circle-step"}>3</div>
+        <div className='yes'>
+          <p>step 3</p>
+          <div>ADD-ONS</div>
+        </div>
       </div>
-      <div>
-        <div>he</div>
-        <div>step 4</div>
-        <div>SUMMARY</div>
+
+      <div className='step'>
+        <div className={!(step == "step4") ? "circle" : "circle-step"}>4</div>
+        <div className='yes'>
+          <p>step 4</p>
+          <div>SUMMARY</div>
+        </div>
       </div>
+
     </div>
   );
 }
@@ -284,13 +279,16 @@ function ContentContainer() {
 
 
   return (
-    <div className='content'>
-      {(step == "step1") && <Step1 setStep={setStep} />}
-      {(step == "step2") && <Step2 setStep={setStep} setLevel={setLevel} plan={plan} setPlan={setPlan} />}
-      {(step == "step3") && <Step3 setStep={setStep} plan={plan} largerStorage={largerStorage} onlineService={onlineService} customProfile={customProfile} setOnlineService={setOnlineService} setCustomProfile={setCustomProfile} setLargerStorage={setLargerStorage} />}
-      {(step == "step4") && <Step4 setStep={setStep} plan={plan} level={level} largerStorage={largerStorage} onlineService={onlineService} customProfile={customProfile} />}
-      {(step == "step5") && <Step5 setStep={setStep} />}
-    </div>
+    <>
+      <SideBar step={step} />
+      <div className='content'>
+        {(step == "step1") && <Step1 setStep={setStep} />}
+        {(step == "step2") && <Step2 setStep={setStep} setLevel={setLevel} plan={plan} setPlan={setPlan} />}
+        {(step == "step3") && <Step3 setStep={setStep} plan={plan} largerStorage={largerStorage} onlineService={onlineService} customProfile={customProfile} setOnlineService={setOnlineService} setCustomProfile={setCustomProfile} setLargerStorage={setLargerStorage} />}
+        {(step == "step4") && <Step4 setStep={setStep} plan={plan} level={level} largerStorage={largerStorage} onlineService={onlineService} customProfile={customProfile} />}
+        {(step == "step5") && <Step5 setStep={setStep} />}
+      </div>
+    </>
   );
 }
 
@@ -299,7 +297,7 @@ function App() {
 
   return (
     <div className='app'>
-      <SideBar />
+
       <ContentContainer />
     </div>
   )
