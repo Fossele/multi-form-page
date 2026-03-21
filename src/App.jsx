@@ -36,7 +36,7 @@ function Step1({ setStep }) {
 
 // select plan step
 
-function Step2({ setStep, setLevel, plan, setPlan }) {
+function Step2({level, setStep, setLevel, plan, setPlan }) {
 
   return (
     <>
@@ -44,7 +44,7 @@ function Step2({ setStep, setLevel, plan, setPlan }) {
         <h1>Select your plan</h1>
         <p>You have the option of monthly or yearly billing.</p>
         <div className='plans'>
-          <div onClick={() => setLevel("arcade")} className='arcade'>
+          <div onClick={() => setLevel("arcade")} className={level =="arcade"? 'choice':"arcade"}>
             <img src={arcade} />
             <span>
               <b>Arcade</b>
@@ -52,7 +52,7 @@ function Step2({ setStep, setLevel, plan, setPlan }) {
             </span>
           </div>
 
-          <div onClick={() => setLevel("advanced")} className='advance'>
+          <div onClick={() => setLevel("advanced")} className={level =="advanced"? 'choice':"advance"}>
             <img src={advanced} />
             <span>
               <b>Advanced</b>
@@ -60,7 +60,7 @@ function Step2({ setStep, setLevel, plan, setPlan }) {
             </span>
           </div>
 
-          <div onClick={() => setLevel("pro")} className='pro'>
+          <div onClick={() => setLevel("pro")} className={level =="pro"? 'choice':"pro"}>
             <img src={pro} />
 
             <span> <b>Pro</b>
@@ -95,45 +95,53 @@ function Step2({ setStep, setLevel, plan, setPlan }) {
 }
 
 function Step3({ setStep, plan, onlineService, setOnlineService, largerStorage, setLargerStorage, customProfile, setCustomProfile }) {
+ 
+
+ 
   return (
     <>
       <div className='operation'>
         <h1>Pick add-ons</h1>
         <p>Add-ons help enhance your gaming experience.</p>
         <div className='add-on'>
-          <div className="box" onClick={() => setOnlineService(!onlineService)}>
-            <div className='tick'>
+          <div className={onlineService?'box-clicked':'box'} onClick={() => setOnlineService(!onlineService)}>
+            <div className='box-left'> 
+               <div className={onlineService?'ticked':'tick'}>
               <img src={check} alt='tick' />
             </div>
-            <div className='center'>
-              <div>Online service</div>
-              <div>Access to multiplayer games</div>
+              <div className='center'>
+                <div>Online service</div>
+                <div>Access to multiplayer games</div>
+              </div>
             </div>
 
             {(plan == "monthly") ? <span>+$1/mo</span> : <span>+$1/yr</span>}
           </div>
 
-          <div className="box" onClick={() => setLargerStorage(!largerStorage)}>
-            <div className='tick'>
-              <img src={check} alt='tick' />
+          <div div className={largerStorage?'box-clicked':'box'} onClick={() => setLargerStorage(!largerStorage)}>
+            <div className='box-left'>
+              <div className={largerStorage?'ticked':'tick'}>
+                <img src={check} alt='tick' />
+              </div>
+              <div className='center'>
+                <div>Larger storage</div>
+                <div> Extra 1TB of cloud save</div>
+              </div>
             </div>
-            <div className='center'>
-              <div>Larger storage</div>
-              <div> Extra 1TB of cloud save</div>
-            </div>
+
 
             {(plan == "monthly") ? <span>+$2/mo</span> : <span>+$2/yr</span>}
           </div>
 
-          <div className="box" onClick={() => setCustomProfile(!customProfile)}>
-            <div>
-                     <div className='tick'>
-              <img src={check} alt='tick' />
-            </div>
-            <div className='center'>
-              <div>Customizable Profile</div>
-              <div> Custom theme on your profile</div>
-            </div>
+          <div div className={customProfile?'box-clicked':'box'} onClick={() => setCustomProfile(!customProfile)}>
+            <div className='box-left' >
+              <div className={customProfile?'ticked':'tick'}>
+                <img src={check} alt='tick' />
+              </div>
+              <div className='center'>
+                <div>Customizable Profile</div>
+                <div> Custom theme on your profile</div>
+              </div>
             </div>
 
 
@@ -176,32 +184,34 @@ function Step4({ plan, setStep, largerStorage, customProfile, onlineService, lev
         <p>Double-check everything looks OK before confirming.</p>
 
 
-        {(plan == "monthly") ? <div>
+        {(plan == "monthly") ? <div className='resultBox'>
           <div>
-            {(level == "arcade") && <div>${level} {price.Mo.arcade}mo</div>}
-            {(level == "advanced") && <div>${level}mo</div>}
-            {(level == "pro") && <div>${level}mo</div>}
-            <div onClick={() => { setStep("step2") }} className='change'>Change</div>
+            {(level == "arcade") && <> <div>${level} {price.Mo.arcade}mo</div><div onClick={() => { setStep("step2") }} className='change'>Change</div></> }
+            {(level == "advanced") &&<><div>${level}mo</div><div onClick={() => { setStep("step2") }} className='change'>Change</div></> }
+            {(level == "pro") && <><div>${level}mo</div><div onClick={() => { setStep("step2") }} className='change'>Change</div></>}
+            
           </div>
-          <div>
+          <>
             {largerStorage && <div>larger storage</div>}
             {customProfile && <div>Custom profile</div>}
             {onlineService && <div>online Service</div>}
-          </div>
+          </>
+          <p>total (per month)</p>
         </div> : <div>
           <div>
             {(level == "arcade") && <div>{level}yr </div>}
             {(level == "advanced") && <div>{level}yr</div>}
             {(level == "pro") && <div>{level}yr</div>}
           </div>
-          <div>
+          <>
             {largerStorage && <div>larger storage yr</div>}
             {customProfile && <div>Custom profile yr</div>}
             {onlineService && <div>online Service yr</div>}
-          </div>
+          </>
+          <p>total (per year)</p>
         </div>
         }
-        <p>{total} (per month/year)</p>
+        
       </div>
       <div className='nav'>
         <button onClick={() => setStep("step3")} className='prev'>Go Back</button>
@@ -283,7 +293,7 @@ function ContentContainer() {
       <SideBar step={step} />
       <div className='content'>
         {(step == "step1") && <Step1 setStep={setStep} />}
-        {(step == "step2") && <Step2 setStep={setStep} setLevel={setLevel} plan={plan} setPlan={setPlan} />}
+        {(step == "step2") && <Step2 level={level} setStep={setStep} setLevel={setLevel} plan={plan} setPlan={setPlan} />}
         {(step == "step3") && <Step3 setStep={setStep} plan={plan} largerStorage={largerStorage} onlineService={onlineService} customProfile={customProfile} setOnlineService={setOnlineService} setCustomProfile={setCustomProfile} setLargerStorage={setLargerStorage} />}
         {(step == "step4") && <Step4 setStep={setStep} plan={plan} level={level} largerStorage={largerStorage} onlineService={onlineService} customProfile={customProfile} />}
         {(step == "step5") && <Step5 setStep={setStep} />}
